@@ -47,5 +47,5 @@ elif [ $(helm plugin list | grep -c unittest) -eq 0 ]; then
 	echo ""
 
 else
-    watchexec -e yaml -- "helm unittest exercises/$1"
+    watchexec -e yaml -- "helm unittest exercises/$1 --debug"
 fi

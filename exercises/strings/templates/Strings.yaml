@@ -6,9 +6,11 @@ metadata:
 # You will learn more about how to handle the various types later in the course.
 {{ $testString := ternary .Values.TestString (toString .Values.TestString) (kindIs "string" .Values.TestString) }}
 data:
-  concatenated: {{ $testString | quote }}
-  containsCat: {{ $testString | quote }}
-  trimmed: {{ $testString | quote }}
-  indentedTwo: {{ $testString | quote }}
-  quotedText: Replace Me
-  appNameAndVersion: {{ $testString | quote }}
+  concatenated: {{ print $testString $testString | quote }}
+  containsCat: {{ contains "cat" $testString }}
+  trimmed: {{ trim $testString | quote }}
+  indentedTwo: {{ $testString | indent 2 | quote }}
+  quotedText: {{ $testString | quote }}
+  appNameAndVersion: {{ printf "%v-1.0.0" (kebabcase $testString) | quote }}
+
+# sh watch_tests.sh strings
